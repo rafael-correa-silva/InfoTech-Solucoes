@@ -1,0 +1,221 @@
+/* =============================================
+   InfoTech Soluções — Responsividade
+   Mobile First → tablet → desktop
+   ============================================= */
+
+/* ---- 480px (mobile grande) ---- */
+@media (min-width: 480px) {
+  :root { --container-px: 1.5rem; }
+
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .about-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .payment-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .payment-item {
+    flex-direction: column;
+  }
+}
+
+/* ---- 768px (tablet) ---- */
+@media (min-width: 768px) {
+  :root {
+    --container-px: 2rem;
+    --header-h: 76px;
+  }
+
+  .section { padding-block: var(--space-20); }
+
+  /* Header */
+  .site-nav { display: flex; }
+  .menu-toggle { display: none; }
+  .header-actions .btn--primary {
+    display: inline-flex;
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: calc(var(--header-h) + var(--space-20));
+    padding-bottom: var(--space-20);
+  }
+
+  .hero h1 { font-size: var(--text-5xl); }
+
+  .hero-stats {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-10);
+  }
+
+  .stat-number-display { font-size: 5rem; }
+
+  .hero-stats-secondary {
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  /* Sobre */
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: var(--space-12);
+  }
+
+  /* Serviços */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Suporte remoto */
+  .remote-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--space-12);
+  }
+
+  /* Diferenciais */
+  .diff-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .diff-card.highlight {
+    grid-column: auto;
+  }
+
+  /* Logística */
+  .logistics-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  /* Equipe */
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Depoimentos */
+  .testimonial-card {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+
+  /* Localização */
+  .location-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: var(--space-10);
+  }
+
+  .map-container iframe {
+    height: 360px;
+  }
+
+  /* Contato */
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: var(--space-10);
+  }
+}
+
+/* ---- 1024px (desktop pequeno) ---- */
+@media (min-width: 1024px) {
+  :root { --container-px: 2.5rem; }
+
+  /* Header nav mais espaçado */
+  .nav-list { gap: var(--space-2); }
+
+  /* Hero */
+  .hero h1 { font-size: 3.5rem; }
+
+  /* Serviços: 3 cols já está ok, pode ir pra 4 se necessário */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* Stepper horizontal */
+  .steps-list {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .step-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    padding-bottom: 0;
+    padding-inline: var(--space-4);
+  }
+
+  .step-left {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+  }
+
+  .step-line {
+    flex: 1;
+    height: 2px;
+    width: auto;
+    margin-top: 0;
+    min-height: auto;
+  }
+
+  .step-item:last-child .step-line {
+    display: block;
+    opacity: 0;
+  }
+
+  .step-content {
+    padding-top: var(--space-5);
+    padding-inline: 0;
+  }
+
+  /* Carrossel 2 visíveis no desktop */
+  .testimonial-card {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+}
+
+/* ---- 1280px (desktop grande) ---- */
+@media (min-width: 1280px) {
+  :root { --container-px: 3rem; }
+
+  .section { padding-block: var(--space-24); }
+
+  .hero { padding-top: calc(var(--header-h) + var(--space-24)); }
+
+  .hero h1 { font-size: 4rem; }
+
+  .stat-number-display { font-size: 6rem; }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .diff-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .diff-card.highlight {
+    grid-column: auto;
+  }
+}
