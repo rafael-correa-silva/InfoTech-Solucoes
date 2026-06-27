@@ -1,21 +1,43 @@
 # InfoTech Soluções — Site Institucional
 
-Site institucional one page para a InfoTech Soluções, empresa de assistência técnica em informática localizada em Patrocínio–MG.
-
-Desenvolvido com HTML, CSS e JavaScript puro (sem frameworks ou bibliotecas externas).
+> Site institucional one-page para a **InfoTech Soluções**, empresa de assistência técnica em informática localizada em Patrocínio–MG. Desenvolvido com HTML, CSS e JavaScript puro, sem frameworks ou dependências externas.
 
 ---
 
-## Como abrir localmente
+## ✦ Visão geral
 
-1. Baixe ou clone esta pasta no seu computador
-2. Abra o arquivo `index.html` diretamente no navegador (Chrome, Firefox, Edge)
-3. Pronto — o site funciona sem servidor ou instalação
+A InfoTech Soluções atua há mais de 8 anos no mercado de manutenção e suporte de computadores. O site foi criado para apresentar os serviços da empresa, facilitar o contato via WhatsApp e reforçar a presença digital local.
 
-> **Dica:** Para evitar erros de CORS no iframe do mapa e nas fontes Google, recomenda-se usar uma extensão como "Live Server" no VS Code ou rodar um servidor local simples:
-> ```
-> npx serve .
-> ```
+**Acesse:** [infotechsolucoes.com.br](https://infotechsolucoes.com.br)
+
+---
+
+## Seções do site
+
+| Seção | Descrição |
+|---|---|
+| Hero | Apresentação principal com CTA para WhatsApp |
+| Sobre | História, missão e números da empresa |
+| Serviços | Cards com os principais serviços oferecidos |
+| Suporte remoto | Atendimento online sem deslocamento |
+| Diferenciais | O que diferencia a InfoTech da concorrência |
+| Logística | Opções de entrega e retirada de equipamentos |
+| Como funciona | Passo a passo do atendimento |
+| Equipe | Apresentação dos técnicos |
+| Depoimentos | Carrossel com avaliações de clientes |
+| FAQ | Perguntas frequentes em accordion |
+| Localização | Mapa e endereço |
+| Contato | Formulário com envio direto para WhatsApp |
+
+---
+
+## Stack
+
+- **HTML5** semântico
+- **CSS3** com custom properties (design tokens)
+- **JavaScript** ES6+ puro — sem jQuery, sem frameworks
+- **Google Fonts** — Space Grotesk (títulos) e Inter (corpo)
+- **Schema.org** — markup estruturado tipo `ComputerRepair`
 
 ---
 
@@ -24,19 +46,17 @@ Desenvolvido com HTML, CSS e JavaScript puro (sem frameworks ou bibliotecas exte
 ```
 /
 ├── assets/
-│   ├── images/
-│   │   ├── logo.png          ← Logo original sem fundo (PNG transparente)
-│   │   └── logo-nav.png      ← Logo redimensionada para o header (48px altura)
-│   ├── icons/                ← Sprites SVG adicionais (se necessário)
-│   └── fonts/                ← Fontes locais (se necessário)
+│   └── images/
+│       ├── logo.png          ← Logo original (PNG transparente)
+│       └── logo-nav.png      ← Logo para o header (48px altura)
 ├── css/
 │   ├── variables.css         ← Design tokens: cores, espaçamentos, tipografia
-│   ├── style.css             ← Estilos base (importa variables.css)
-│   ├── animations.css        ← Transições, fade-in, carrossel, FAQ
+│   ├── style.css             ← Estilos base
+│   ├── animations.css        ← Transições, fade-in, FAQ, WhatsApp pulse
 │   └── responsive.css        ← Media queries: 480px | 768px | 1024px | 1280px
 ├── js/
 │   ├── main.js               ← Menu hambúrguer, header scroll, carrossel, nav highlight
-│   ├── form.js               ← Validação e feedback do formulário de contato
+│   ├── form.js               ← Validação do formulário + envio via WhatsApp
 │   ├── animations.js         ← Intersection Observer para fade-in de seções
 │   └── faq.js                ← Accordion do FAQ com aria-expanded
 ├── robots.txt
@@ -47,93 +67,90 @@ Desenvolvido com HTML, CSS e JavaScript puro (sem frameworks ou bibliotecas exte
 
 ---
 
-## Substituições necessárias antes de publicar
+## Como rodar localmente
 
-### 1. Logo
-A logo já está incluída em `assets/images/logo.png` e `logo-nav.png` (sem fundo).
-Se quiser atualizar, substitua esses arquivos mantendo os mesmos nomes.
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/infotech-solucoes.git
 
-### 2. Google Maps
-O iframe do mapa usa um embed genérico. Para usar o mapa real:
-1. Acesse [maps.google.com](https://maps.google.com)
-2. Busque o endereço exato
-3. Clique em **Compartilhar → Incorporar mapa**
-4. Copie o `src` do iframe gerado
-5. Substitua o `src` no `index.html` na seção `#localizacao`
+# Entre na pasta
+cd infotech-solucoes
 
-### 3. Formulário de contato
-O formulário tem validação front-end completa mas o envio é simulado.
-Para ativar o envio real, use o [Formspree](https://formspree.io):
-1. Crie uma conta e um novo formulário
-2. Copie o endpoint gerado (ex: `https://formspree.io/f/xabc1234`)
-3. No `index.html`, localize `<form id="contact-form">` e adicione:
-   - `action="https://formspree.io/f/SEU_ID"`
-   - `method="POST"`
-4. No `form.js`, descomente o bloco `fetch` e remova o `e.preventDefault()`
-
-### 4. Imagem Open Graph
-Crie uma imagem de compartilhamento (1200×630px) e salve em:
-`assets/images/og-image.jpg`
-Atualize a meta tag `og:image` no `<head>` do `index.html`.
-
-### 5. Fotos da equipe
-Substitua os placeholders de equipe por fotos reais:
-- Adicione as fotos em `assets/images/` no formato WebP (ex: `carlos.webp`)
-- No `index.html`, substitua cada `.team-photo` placeholder pelo elemento `<picture>`:
-```html
-<picture>
-  <source srcset="assets/images/carlos.webp" type="image/webp">
-  <img src="assets/images/carlos.jpg" alt="Carlos Henrique — Proprietário e Técnico Principal" width="100" height="100" loading="lazy">
-</picture>
+# Abra com Live Server (VS Code) ou sirva com npx
+npx serve .
 ```
+
+Ou simplesmente abra o `index.html` diretamente no navegador — o site funciona sem servidor ou build step.
+
+---
+
+## Funcionalidades técnicas
+
+- **Carrossel de depoimentos** — navegação por scroll nativo com `scroll-snap`, botões, dots e suporte a swipe no mobile
+- **Formulário de contato** — validação completa em tempo real; ao submeter, abre o WhatsApp com os dados já preenchidos na mensagem
+- **Menu mobile** — hambúrguer com trap de foco e fechamento por tecla `Escape`
+- **Fade-in** via `IntersectionObserver` — animações escalonadas ao rolar a página
+- **Header dinâmico** — muda de estilo ao scrollar
+- **Nav highlight** — item ativo no menu acompanha a seção visível
+- **FAQ accordion** — exclusivo, acessível com `aria-expanded`
+- **Botão flutuante WhatsApp** — com animação de pulso
+- **`prefers-reduced-motion`** — todas as animações desativadas quando o usuário prefere
+
+---
+
+## SEO e acessibilidade
+
+**SEO**
+- Schema.org `ComputerRepair` com endereço, telefone e horário
+- Meta tags completas: `title`, `description`, `keywords`, Open Graph
+- `<h1>` único na hero; hierarquia lógica de headings
+- `robots.txt` e `sitemap.xml` incluídos
+- URL canônica definida
+
+**Acessibilidade**
+- HTML semântico — `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+- `aria-label` em todos os botões de ícone
+- `aria-expanded` no menu hambúrguer e no FAQ
+- Foco trapeado no menu mobile (Tab e Shift+Tab)
+- Roles e live regions no formulário e carrossel
 
 ---
 
 ## Paleta de cores
 
-| Nome            | Hex       | Uso                          |
-|-----------------|-----------|------------------------------|
-| Azul principal  | `#1A56DB` | Botões, links, destaques     |
-| Azul escuro     | `#0F3A8A` | Hover, gradiente             |
-| Azul claro      | `#EBF2FF` | Fundos de cards, badges      |
-| Preto texto     | `#0D0D0D` | Texto principal              |
-| Cinza texto     | `#6B7280` | Texto secundário             |
-| Cinza claro     | `#F3F4F6` | Fundo de seções alternadas   |
-| Branco          | `#FFFFFF` | Base                         |
-| Verde WhatsApp  | `#25D366` | Botão flutuante              |
-
----
-
-## Tipografia
-
-- **Display / Títulos:** Space Grotesk (600–700) — carregada via Google Fonts
-- **Corpo / Texto:** Inter (400–500) — carregada via Google Fonts
-
----
-
-## SEO
-
-- Schema.org tipo `ComputerRepair` com endereço, telefone e horário
-- Meta tags completas: title, description, keywords, Open Graph
-- Um único `<h1>` na hero; hierarquia lógica de headings
-- `robots.txt` e `sitemap.xml` incluídos
-
----
-
-## Acessibilidade
-
-- HTML semântico com `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
-- `aria-label` em todos os botões de ícone
-- `aria-expanded` no menu hambúrguer e no FAQ
-- Foco trapeado no menu mobile (navegação por teclado)
-- `prefers-reduced-motion` respeitado nas animações
+| Token | Hex | Uso |
+|---|---|---|
+| `--color-blue` | `#1A56DB` | Botões, links, destaques |
+| `--color-blue-dark` | `#0F3A8A` | Hover, gradiente |
+| `--color-blue-light` | `#EBF2FF` | Fundos de cards, badges |
+| `--color-black` | `#0D0D0D` | Texto principal |
+| `--color-gray-500` | `#6B7280` | Texto secundário |
+| `--color-gray-100` | `#F3F4F6` | Fundo de seções alternadas |
+| `--color-white` | `#FFFFFF` | Base |
+| `--color-whatsapp` | `#25D366` | Botão flutuante |
 
 ---
 
 ## Contato da empresa
 
-- **WhatsApp:** (34) 99999-1234
-- **E-mail:** contato@infotechsolucoes.com.br
-- **Endereço:** Rua Presidente Vargas, 450, Centro – Patrocínio/MG
-- **Instagram:** @infotechsolucoes
-- **Site:** infotechsolucoes.com.br
+| Canal | |
+|---|---|
+| WhatsApp | [(34) 99811-1439](https://wa.me/5534998111439) |
+| Instagram | [@infotechsolucoes](https://instagram.com/rafael_coorreea) |
+| Endereço | Rua Tamôios, 1171 — Bairro Fronteira, Patrocínio–MG |
+| Site | [infotechsolucoes.com.br](https://infotechsolucoes.com.br) |
+
+---
+
+## Desenvolvedor
+
+Desenvolvido por **Rafael Corrêa**
+
+[![Instagram](https://img.shields.io/badge/@rafael__coorreea-E4405F?style=flat&logo=instagram&logoColor=white)](https://instagram.com/rafael_coorreea)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/seu-usuario)
+
+---
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
