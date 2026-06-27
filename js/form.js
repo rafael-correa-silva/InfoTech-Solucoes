@@ -1,9 +1,11 @@
 /* =============================================
    InfoTech Soluções — form.js
-   Validação de formulário | Feedback visual
+   Validação de formulário | Envio via WhatsApp
    ============================================= */
 
 'use strict';
+
+const WA_NUMBER = '5534998111439';
 
 document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
@@ -36,7 +38,7 @@ function initContactForm() {
   function validateField(field) {
     const group = field.closest('.form-group');
     const error = group ? group.querySelector('.form-error') : null;
-    let msg     = '';
+    let msg = '';
 
     if (field.hasAttribute('required') && !field.value.trim()) {
       msg = 'Este campo é obrigatório.';
@@ -70,41 +72,46 @@ function initContactForm() {
     });
   });
 
-  /* ---- Submit ---- */
+  /* ---- Submit: valida e abre WhatsApp ---- */
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const fields  = [...form.querySelectorAll('.form-control')];
-    const allOk   = fields.map(validateField).every(Boolean);
+    const fields = [...form.querySelectorAll('.form-control')];
+    const allOk  = fields.map(validateField).every(Boolean);
 
     if (!allOk) {
-      // Focar no primeiro campo com erro
       const firstError = form.querySelector('.form-control.error');
       firstError && firstError.focus();
       return;
     }
 
-    /* --- Simular envio (substituir pelo endpoint real futuramente) ---
-     *
-     * Para integrar com Formspree:
-     * 1. Crie uma conta em https://formspree.io
-     * 2. Adicione o atributo ao <form>: action="https://formspree.io/f/SEU_ID" method="POST"
-     * 3. Remova o e.preventDefault() acima (ou use fetch abaixo)
-     *
-     * Para fetch (AJAX):
-     * const data = new FormData(form);
-     * fetch('https://formspree.io/f/SEU_ID', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-     *   .then(r => r.ok ? showSuccess() : alert('Erro ao enviar. Tente novamente.'))
-     *   .catch(() => alert('Erro de conexão.'));
-     */
+    /* Montar mensagem com os dados do formulário */
+    const nome     = (form.querySelector('#name')    || {}).value || '';
+    const telefone = (form.querySelector('#phone')   || {}).value || '';
+    const email    = (form.querySelector('#email')   || {}).value || '';
+    const servico  = (form.querySelector('#service') || {}).value || '';
+    const mensagem = (form.querySelector('#message') || {}).value || '';
+
+    const linhas = [
+      'Olá! Vim pelo site da InfoTech Soluções e gostaria de solicitar um atendimento.',
+      '',
+      `*Nome:* ${nome}`,
+    ];
+    if (telefone) linhas.push(`*Telefone:* ${telefone}`);
+    if (email)    linhas.push(`*E-mail:* ${email}`);
+    if (servico)  linhas.push(`*Serviço:* ${servico}`);
+    if (mensagem) linhas.push(`*Mensagem:* ${mensagem}`);
+
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(linhas.join('\n'))}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
 
     showSuccess();
   });
 
+  /* ---- Exibir confirmação ---- */
   function showSuccess() {
     if (!successMsg || !formWrap) return;
 
-    // Esconder campos
     form.querySelectorAll('.form-group, .form-submit-row').forEach(el => {
       el.style.display = 'none';
     });
@@ -113,7 +120,6 @@ function initContactForm() {
     successMsg.setAttribute('tabindex', '-1');
     successMsg.focus();
 
-    // Restaurar após 6 segundos
     setTimeout(() => {
       successMsg.classList.remove('show');
       form.reset();
