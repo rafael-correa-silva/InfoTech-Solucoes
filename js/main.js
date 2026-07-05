@@ -85,11 +85,6 @@ function initMobileMenu() {
 
 /* ---- Carrossel de depoimentos ---- */
 function initCarousel() {
-  /*
-   * Abordagem: overflow-x scroll nativo no wrapper + scroll-snap.
-   * Os botões e dots chamam scrollTo() — sem transform, sem cálculo de offset.
-   * Funciona independente do tamanho dos cards ou do gap do CSS.
-   */
   const wrapper = document.querySelector('.carousel-wrapper');
   if (!wrapper) return;
 
